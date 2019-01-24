@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <com2 @func1='show'></com2>
+  </div>
+  <template id='tmp1' >
+    <div>
+      <h1>zi子</h1>
+      <input type="button" value='这是子组件中的按钮 - 点击它，触发 父组件传递过来的 func 方法' @click='myclick'>
+    </div>
+  </template>
+
+  
+
+  <script>
+    var com2 = {
+      template: '#tmp1',
+      methods:{
+        myclick(){
+          this.$emit('func1')
+        }
+      }
+    }
+    var vm = new Vue({
+      el: '#app',
+      data: {
+      },
+      methods:{
+        show(){
+          console.log('调用了父组件身上的 show 方法: --- ') 
+        }
+      },
+      components:{
+        com2
+      }
+      
+    });
+  </script>
+</body>
+
+</html>
